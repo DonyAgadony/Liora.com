@@ -5,73 +5,82 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Modern Navbar</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css\styles.css">
 </head>
 
 <body>
-  <nav>
-    <div class="navbar">
-      <a href="#">
-        <img class="logo" src="logo.png" alt="Logo">
-      </a>
-      <ul class="nav-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
   <div class="Body">
+    <div class="HighLight">
+      <h1>Liora's Classroom.exe</h1>
+    </div>
     <div class="inputs">
-      <div class="eq1">
-        Equation 1:
+      <div id="eq1" class="Equation">
+        <div class="text">Equation 1:</div>
+        <br>
         <input type="number" id="NumOfXEq1" class="inputOfEq">
-        X
+        <div class="text">X</div>
         <input type="number" id="NumOfYEq1" class="inputOfEq">
-        Y
+        <div class="text">Y</div>
         <input type="number" id="NumOfZEq1" class="inputOfEq">
-        Z
+        <div class="text">Z</div>
         <input type="number" id="NumOfWEq1" class="inputOfEq">
-        W
+        <div class="text">W</div>
+        <div class="text">=</div>
+        <input type="number" id="NumOfNEq1" class="inputOfEq">
       </div>
-      <div class="eq2">
-        Equation 2:
+      <div id="eq2" class="Equation">
+        <div class="text">Equation 2:</div>
+        <br>
         <input type="number" id="NumOfXEq2" class="inputOfEq">
-        X
+        <div class="text">X</div>
         <input type="number" id="NumOfYEq2" class="inputOfEq">
-        Y
+        <div class="text">Y</div>
         <input type="number" id="NumOfZEq2" class="inputOfEq">
-        Z
+        <div class="text">Z</div>
         <input type="number" id="NumOfWEq2" class="inputOfEq">
-        W
+        <div class="text">W</div>
+        <div class="text">=</div>
+        <input type="number" id="NumOfNEq2" class="inputOfEq">
       </div>
-      <div class="eq3">
-        Equation 3:
+      <div id="eq3" class="Equation">
+        <div class="text">Equation 3:</div>
+        <br>
+
         <input type="number" id="NumOfXEq3" class="inputOfEq">
-        X
+        <div class="text">X</div>
         <input type="number" id="NumOfYEq3" class="inputOfEq">
-        Y
+        <div class="text">Y</div>
         <input type="number" id="NumOfZEq3" class="inputOfEq">
-        Z
+        <div class="text">Z</div>
         <input type="number" id="NumOfWEq3" class="inputOfEq">
-        W
+        <div class="text">W</div>
+        <div class="text">=</div>
+        <input type="number" id="NumOfNEq3" class="inputOfEq">
       </div>
-      <div class="eq4">
-        Equation 4:
-        <input type="number" id="NumOfXEq4" class="inputOfEq"> X
-        <input type="number" id="NumOfYEq4" class="inputOfEq"> Y
-        <input type="number" id="NumOfZEq4" class="inputOfEq"> Z
-        <input type="number" id="NumOfWEq4" class="inputOfEq"> W
+      <div id="eq4" class="Equation">
+        <div class="text">Equation 4:</div>
+        <br>
+
+        <input type="number" id="NumOfXEq4" class="inputOfEq">
+        <div class="text">X</div>
+        <input type="number" id="NumOfYEq4" class="inputOfEq">
+        <div class="text">Y</div>
+        <input type="number" id="NumOfZEq4" class="inputOfEq">
+        <div class="text">Z</div>
+        <input type="number" id="NumOfWEq4" class="inputOfEq">
+        <div class="text">W</div>
+        <div class="text">=</div>
+        <input type="number" id="NumOfNEq4" class="inputOfEq">
       </div>
+      <br><br><br>
+      <button id="submitButton" class="submit">Submit</button>
 
     </div>
     <div class="Preview">
 
     </div>
   </div>
-
-
+  <script src="js/index.js" type="module"></script>
 </body>
 
 </html>

@@ -33,7 +33,7 @@ class Program
     server.Start();
 
     Console.WriteLine("Server started. Listening for requests...");
-    Console.WriteLine("Main page on http://localhost:5000/website/index.html");
+    Console.WriteLine("Main page on http://localhost:5000/website/html/index.html");
 
     /*─────────────────────────╮
     │ Processing HTTP requests │
@@ -91,17 +91,15 @@ class Program
     string absPath = request.Url!.AbsolutePath;
     if (absPath == "/addEquations")
     {
-      try
-      {
-        string equationString = Utils.GetBody<string>(request);
-        Equations equations = JsonSerializer.Deserialize<Equations>(equationString)!;
-        EquationValues RtnToWeb = MainEquations(equations);
+      Equations equations = request.GetBody<Equations>();
+      EquationValues RtnToWeb = MainEquations(equations);
+      Console.WriteLine("Equations Recieved");
+      Console.WriteLine(equations.Eq1);
+      Console.WriteLine(equations.Eq2);
+      Console.WriteLine(equations.Eq3);
+      Console.WriteLine(equations.Eq4);
+      Console.WriteLine($"The slutions are: X = {RtnToWeb.X}, Y = {RtnToWeb.Y}, Z = {RtnToWeb.Z}, W = {RtnToWeb.W}");
 
-      }
-      catch
-      {
-        Console.WriteLine("Unwanted Change has happend");
-      }
     }
   }
 
