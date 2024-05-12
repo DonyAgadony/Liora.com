@@ -2,6 +2,7 @@
 using System.Net;
 using static Project.Utils;
 using System.Text.Json;
+using System.Text;
 
 namespace Project;
 // FROM NOW ON IDO'S CODE ABOUT EQUATIONS OR SOMETHINGָָ
@@ -99,8 +100,14 @@ class Program
       Console.WriteLine(equations.Eq3);
       Console.WriteLine(equations.Eq4);
       Console.WriteLine($"The slutions are: X = {RtnToWeb.X}, Y = {RtnToWeb.Y}, Z = {RtnToWeb.Z}, W = {RtnToWeb.W}");
-
+      response.OutputStream.Write(ToBytes(RtnToWeb));
+      Console.WriteLine("Sent back to website");
     }
+  }
+  public static byte[] ToBytes<T>(T value)
+  {
+    string json = JsonSerializer.Serialize(value);
+    return Encoding.UTF8.GetBytes(json);
   }
 
   //From here it is idos code about equations.
