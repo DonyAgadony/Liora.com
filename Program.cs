@@ -2,7 +2,7 @@
 using System.Net;
 using static Project.Utils;
 using System.Text.Json;
-using System.Text;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Project;
 // FROM NOW ON IDO'S CODE ABOUT EQUATIONS OR SOMETHINGָָ
@@ -30,7 +30,7 @@ class Program
     │ Creating the server object │
     ╰───────────────────────────*/
     var server = new HttpListener();
-    server.Prefixes.Add("http://*:5000/");
+    server.Prefixes.Add("http://localhost:5000/");
     server.Start();
 
     Console.WriteLine("Server started. Listening for requests...");
@@ -100,14 +100,8 @@ class Program
       Console.WriteLine(equations.Eq3);
       Console.WriteLine(equations.Eq4);
       Console.WriteLine($"The slutions are: X = {RtnToWeb.X}, Y = {RtnToWeb.Y}, Z = {RtnToWeb.Z}, W = {RtnToWeb.W}");
-      response.OutputStream.Write(ToBytes(RtnToWeb));
-      Console.WriteLine("Sent back to website");
+
     }
-  }
-  public static byte[] ToBytes<T>(T value)
-  {
-    string json = JsonSerializer.Serialize(value);
-    return Encoding.UTF8.GetBytes(json);
   }
 
   //From here it is idos code about equations.
@@ -122,6 +116,12 @@ class Program
     string? SecEq = equations.Eq2;
     string? ThiEq = equations.Eq3;
     string? FouEq = equations.Eq4;
+    Console.WriteLine($"Eq1: {FirEq}");
+    Console.WriteLine($"Eq2: {SecEq}");
+    Console.WriteLine($"Eq3: {ThiEq}");
+    Console.WriteLine($"Eq4: {FouEq}");
+
+    Console.WriteLine(SecEq == null);
 
     int num = 0;
     if (FirEq != null)
@@ -140,7 +140,7 @@ class Program
         }
       }
     }
-
+    Console.WriteLine("NUM IS " + num);
     EquationValues Eq1 = CreateEqInstance(FirEq, num);
     EquationValues Eq2 = CreateEqInstance(SecEq, num);
     EquationValues Eq3 = CreateEqInstance(ThiEq, num);
@@ -370,20 +370,28 @@ class Program
     if (variables >= 1)
     {
       rtn.X = x;
+      Console.WriteLine("X isnt null");
       if (variables >= 2)
       {
         rtn.Y = y;
+        Console.WriteLine("Y isnt null");
         if (variables >= 3)
         {
           rtn.Z = z;
+          Console.WriteLine("Z isnt null");
           if (variables >= 4)
           {
             rtn.W = w;
+            Console.WriteLine("W isnt null");
           }
         }
       }
     }
-    rtn.N = n;
+    Console.WriteLine($"X = {rtn.X}");
+    Console.WriteLine($"Y = {rtn.Y}");
+    Console.WriteLine($"Z = {rtn.Z}");
+    Console.WriteLine($"W = {rtn.W}");
+
     return rtn;
   }
   public static EquationValues CalcByMatrix(EquationValues[] Eq)
@@ -403,6 +411,7 @@ class Program
 
     if (Eq[0].W != null)
     {
+      Console.WriteLine("Here" + Eq[0].W);
       D = Calc4x4Matrix(Matrix);
       Dx = Calc4x4Matrix(ReplaceRow(Matrix, 0, Eq));
       Dy = Calc4x4Matrix(ReplaceRow(Matrix, 1, Eq));
@@ -415,6 +424,7 @@ class Program
     }
     else if (Eq[0].Z != null)
     {
+      Console.WriteLine("There");
       D = Calc3x3Matrix(Matrix);
       Console.WriteLine(D);
       Dx = Calc3x3Matrix(ReplaceRow(Matrix, 0, Eq));
@@ -429,12 +439,19 @@ class Program
     }
     else if (Eq[0].Y != null)
     {
+      Console.WriteLine("I wanna kms");
       D = Calc2x2Matrix(Matrix);
       Dx = Calc2x2Matrix(ReplaceRow(Matrix, 0, Eq));
       Dy = Calc2x2Matrix(ReplaceRow(Matrix, 1, Eq));
       EqVal.X = Dx / D;
       EqVal.Y = Dy / D;
     }
+    else if (Eq[0].X != null)
+    {
+      Console.WriteLine("Its not worth the effort anymore");
+      EqVal.X = Eq[0].N / Eq[0].X;
+    }
+    Console.WriteLine($"X = {EqVal.X}");
     return EqVal;
   }
   public static double?[,] ReplaceRow(double?[,] Mat, int rep, EquationValues[] EqSys)

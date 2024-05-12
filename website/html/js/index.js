@@ -3,7 +3,6 @@ import { send } from "./_utils"
 let submitButton = document.getElementById("submitButton");
 
 submitButton.onclick = function () {
-    console.log("Start Format");
     let XEq1 = parseFloat(document.getElementById("NumOfXEq1").value);
     let YEq1 = parseFloat(document.getElementById("NumOfYEq1").value);
     let ZEq1 = parseFloat(document.getElementById("NumOfZEq1").value);
@@ -65,46 +64,33 @@ submitButton.onclick = function () {
     addEquations(eq1, eq2, eq3, eq4);
 }
 
-
-
 function FormatEquation(X, Y, Z, W, N) {
     let FormattedEq = "";
-    if (X > 0) {
-        FormattedEq += X + "x";
-    }
-    else if (X == 0) { }
-    else {
-        FormattedEq += " - " + Math.abs(X) + "x";
-    }
+    console.log(X)
+    if (X == null || X == 0) { }
+    else if (X >= 0) { FormattedEq += X + "x"; }
+    else { FormattedEq += " - " + Math.abs(X) + "x"; }
 
-    if (Y > 0) {
-        FormattedEq += " + " + Math.abs(Y) + "y";
-    }
-    else if (Y == 0) { }
-    else {
-        FormattedEq += " - " + Math.abs(Y) + "y";
-    }
+    console.log(Y)
+    if (Y == null || Y == 0) { }
+    else if (Y >= 0) { FormattedEq += " + " + Math.abs(Y) + "y"; }
+    else { FormattedEq += " - " + Math.abs(Y) + "y"; }
 
-    if (Z > 0) {
-        FormattedEq += " + " + Math.abs(Z) + "z";
-    }
-    else if (Z == 0) { }
-    else {
-        FormattedEq += " - " + Math.abs(Z) + "z";
-    }
+    console.log(Z)
+    if (Z == null || Z == 0) { }
+    else if (Z >= 0) { FormattedEq += " + " + Math.abs(Z) + "z"; }
+    else { FormattedEq += " - " + Math.abs(Z) + "z"; }
 
-    if (W > 0) {
-        FormattedEq += " + " + Math.abs(W) + "w";
-    }
-    else if (W == 0) { }
-    else {
-        FormattedEq += " - " + Math.abs(W) + "w"
-    }
-    if (N >= 0) {
-        FormattedEq += " = " + Math.abs(N);
-    }
-    else {
-        FormattedEq += " = - " + Math.abs(N);
+    console.log(W)
+    if (W == null || W == 0) { }
+    else if (W >= 0) { FormattedEq += " + " + Math.abs(W) + "w"; }
+    else { FormattedEq += " - " + Math.abs(W) + "w"; }
+
+    if (N >= 0) { FormattedEq += " = " + Math.abs(N); }
+    else { FormattedEq += " = - " + Math.abs(N); }
+
+    if ((X == null || 0) && (Y == null || Y == 0) && (Z == null || Z == 0) && (Y == null || Y == 0)) {
+        FormattedEq = null;
     }
     return FormattedEq;
 }
@@ -117,6 +103,5 @@ async function addEquations(eq1, eq2, eq3, eq4) {
         Eq4: eq4
     };
     console.log(equations);
-
     send("/addEquations", equations);
 }
