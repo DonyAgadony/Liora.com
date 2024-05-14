@@ -1,7 +1,11 @@
-import { send } from "./_utils"
+import { send, get, getQuery } from "./_utils"
+import { getIdFromLogIn } from "./logIn"
 
 let submitButton = document.getElementById("submitButton");
+let id = getIdFromLogIn();
 
+// here
+let level = await send("/getLevel", id);
 submitButton.onclick = function () {
     let XEq1 = parseFloat(document.getElementById("NumOfXEq1").value);
     let YEq1 = parseFloat(document.getElementById("NumOfYEq1").value);
@@ -53,35 +57,31 @@ submitButton.onclick = function () {
     if (isNaN(NEq4)) { NEq4 = null; }
 
     // 2x - 8y + 1z - 9w = 43
-    let eq1 = FormatEquation(XEq1, YEq1, ZEq1, WEq1, NEq1);
-    var eq2 = FormatEquation(XEq2, YEq2, ZEq2, WEq2, NEq2);
-    var eq3 = FormatEquation(XEq3, YEq3, ZEq3, WEq3, NEq3);
-    var eq4 = FormatEquation(XEq4, YEq4, ZEq4, WEq4, NEq4);
+    let eq1 = formatEquation(XEq1, YEq1, ZEq1, WEq1, NEq1);
+    var eq2 = formatEquation(XEq2, YEq2, ZEq2, WEq2, NEq2);
+    var eq3 = formatEquation(XEq3, YEq3, ZEq3, WEq3, NEq3);
+    var eq4 = formatEquation(XEq4, YEq4, ZEq4, WEq4, NEq4);
     console.log(eq1);
-    console.log(eq2);
-    console.log(eq3);
-    console.log(eq4);
+    // console.log(eq2);
+    // console.log(eq3);
+    // console.log(eq4);
     addEquations(eq1, eq2, eq3, eq4);
 }
 
-function FormatEquation(X, Y, Z, W, N) {
+function formatEquation(X, Y, Z, W, N) {
     let FormattedEq = "";
-    console.log(X)
     if (X == null || X == 0) { }
     else if (X >= 0) { FormattedEq += X + "x"; }
-    else { FormattedEq += " - " + Math.abs(X) + "x"; }
+    else { FormattedEq += "-" + Math.abs(X) + "x"; }
 
-    console.log(Y)
     if (Y == null || Y == 0) { }
     else if (Y >= 0) { FormattedEq += " + " + Math.abs(Y) + "y"; }
     else { FormattedEq += " - " + Math.abs(Y) + "y"; }
 
-    console.log(Z)
     if (Z == null || Z == 0) { }
     else if (Z >= 0) { FormattedEq += " + " + Math.abs(Z) + "z"; }
     else { FormattedEq += " - " + Math.abs(Z) + "z"; }
 
-    console.log(W)
     if (W == null || W == 0) { }
     else if (W >= 0) { FormattedEq += " + " + Math.abs(W) + "w"; }
     else { FormattedEq += " - " + Math.abs(W) + "w"; }
@@ -102,6 +102,36 @@ async function addEquations(eq1, eq2, eq3, eq4) {
         Eq3: eq3,
         Eq4: eq4
     };
-    console.log(equations);
-    send("/addEquations", equations);
+    let response = await send("/addEquations", equations);
+    console.log("received response:");
+    console.log(response);
+
+    level = await send("/addLevel", id);
+    // here
+
+    writeEqValues();
+}
+function writeEqValues() {
+    let output = document.getElementById("output");
+    output.innerText = "Output:";
+    if (response.X != null || isNaN(response.X)) {
+        let paragraphX = document.createElement("p");
+        paragraphX.innerText = "X = " + response.X;
+        output.appendChild(paragraphX);
+    }
+    if (response.Y != null || isNaN(response.Y)) {
+        let paragraphY = document.createElement("p");
+        paragraphY.innerText = "Y = " + response.Y;
+        output.appendChild(paragraphY);
+    }
+    if (response.Z != null || isNaN(response.Z)) {
+        let paragraphZ = document.createElement("p");
+        paragraphZ.innerText = "Z = " + response.Z;
+        output.appendChild(paragraphZ);
+    }
+    if (response.W != null || isNaN(response.W)) {
+        let paragraphW = document.createElement("p");
+        paragraphW.innerText = "W = " + response.W;
+        output.appendChild(paragraphW);
+    }
 }

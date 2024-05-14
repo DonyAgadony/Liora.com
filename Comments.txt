@@ -1,0 +1,14 @@
+index.js; line 4, line 5:
+make sign in and log in pages in the corresponding files in the html folder and link the 
+index.js; line 107:
+make a function to display the level in the variable instead of the level already displayed
+logIn.js; line 10:
+redirect to Sign Up page
+Program.cs; line 140:
+Add an instance for a user that's not found, response.Write("UserDoesntExist");
+signUp.js; line 7: 
+Add an instance for username already exists in database without any regard to the password, redirect to log in
+logIn.html, styles.css
+make page
+signUp.html, styles.css;
+make page

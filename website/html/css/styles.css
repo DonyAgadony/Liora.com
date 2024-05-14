@@ -159,3 +159,14 @@ section h2 {
 .submit:active {
     transform: scale(0.9);
 }
+.output{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #F1FAFF;
+    text-shadow: 2px 5px 4px #4F017D;
+    margin-top: 10px;
+    font-size: 4.5vh
+}
