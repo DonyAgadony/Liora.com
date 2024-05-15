@@ -12,3 +12,4 @@ async function getIdFromLogIn() {
     }
     return Id;
 }
+console.log(getIdFromLogIn());

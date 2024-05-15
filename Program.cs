@@ -127,7 +127,7 @@ class Program
 
       var user = new User(username, password, userId, 0);
       databaseContext.Users.Add(user);
-
+      Console.WriteLine($"Added user; USER: {username} PASS: {password}");
       response.Write(userId);
     }
     if (absPath == "/logIn")

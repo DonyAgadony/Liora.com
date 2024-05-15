@@ -1,5 +1,3 @@
-index.js; line 4, line 5:
-make sign in and log in pages in the corresponding files in the html folder and link the 
 index.js; line 107:
 make a function to display the level in the variable instead of the level already displayed
 logIn.js; line 10:
