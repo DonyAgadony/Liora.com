@@ -16,7 +16,8 @@
         align-self: center;
     align-items: center;
     gap: 25px;
-    margin-top: 250px;
+    margin-top: 200px;
+
 }
 .inputs{
     display: flex;
