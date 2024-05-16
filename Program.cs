@@ -8,8 +8,6 @@ using System.Data.Common;
 
 namespace Project;
 
-
-
 class User(string Id, string Username, string Password, int Level)
 {
   [Key]
