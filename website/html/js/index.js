@@ -3,6 +3,7 @@ import { getIdFromLogIn } from "./logIn"
 
 let submitButton = document.getElementById("submitButton");
 let id = getIdFromLogIn();
+let levelDiv = document.getElementById("level");
 
 // here
 let level = await send("/getLevel", id);
@@ -107,7 +108,7 @@ async function addEquations(eq1, eq2, eq3, eq4) {
     console.log(response);
 
     level = await send("/addLevel", id);
-    // here
+    levelDiv.innerHTML = 'Current level: ' + level;
 
     writeEqValues();
 }
@@ -134,4 +135,8 @@ function writeEqValues() {
         paragraphW.innerText = "W = " + response.W;
         output.appendChild(paragraphW);
     }
+}
+function displayLevel() {
+
+levelDiv.innerHTML = 'Current level: ' + level;
 }

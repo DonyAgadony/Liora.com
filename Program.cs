@@ -97,12 +97,12 @@ class Program
     if (absPath == "/addEquations")
     {
       Equations equations = request.GetBody<Equations>();
-      Console.WriteLine("Equations Recieved");
       EquationValues RtnToWeb = EquationsProgram.MainEquations(equations);
-      string Json = JsonConvert.SerializeObject(RtnToWeb);
-      response.ContentType = "application/json";
-      response.Write(Json);
-      Console.WriteLine($"The solutions are: X = {RtnToWeb.X}, Y = {RtnToWeb.Y}, Z = {RtnToWeb.Z}, W = {RtnToWeb.W}");
+      // string Json = JsonConvert.SerializeObject(RtnToWeb);
+      // response.ContentType = "application/json";
+      // response.Write(Json);
+      // incase current code doesnt work
+      response.Write(RtnToWeb);
     }
     if (absPath == "/getLevel")
     {
@@ -115,28 +115,51 @@ class Program
       string Id = request.GetBody<string>();
       User user = databaseContext.Users.Find(Id)!;
       user.LevelUp();
+      databaseContext.SaveChanges();
+      // user = databaseContext.Users.Find(Id)!; (Im not sure if we have to do this so its a comment in the meantime)
       response.Write(user.Level);
     }
     if (absPath == "/signUp")
     {
+
       (string username, string password) = request.GetBody<(string, string)>();
 
-      var userId = Uuid.NewDatabaseFriendly(UUIDNext.Database.SQLite).ToString();
-
-      var user = new User(username, password, userId, 0);
-      databaseContext.Users.Add(user);
-      Console.WriteLine($"Added user; USER: {username} PASS: {password}");
-      response.Write(userId);
+      User CheckForExistingUser = databaseContext.Users.First(u => u.Username == username)!;
+      // username already exists in context
+      if (CheckForExistingUser != null)
+      {
+        response.Write("UserAlreadyExists");
+      }
+      // adding user to database and returning the new user's Id
+      else
+      {
+        var userId = Uuid.NewDatabaseFriendly(UUIDNext.Database.SQLite).ToString();
+        var User = new User(username, password, userId, 0);
+        databaseContext.Users.Add(User);
+        response.Write(userId);
+      }
     }
     if (absPath == "/logIn")
     {
       (string username, string password) = request.GetBody<(string, string)>();
 
-      User user = databaseContext.Users.First(
-        u => u.Username == username && u.Password == password
-      )!;
-      // here
-      response.Write(user.Id);
+      User user = databaseContext.Users.First(u => u.Username == username && u.Password == password);
+      User CheckForUsername = databaseContext.Users.First(u => u.Username == username);
+      // username doesnt exist in context
+      if (CheckForUsername == null)
+      {
+        response.Write("UserDoesntExist");
+      }
+      // username exists in context and password doesnt match
+      else if (CheckForUsername != null && user == null)
+      {
+        response.Write("IncorrectPassword");
+      }
+      // returning existing user ID
+      else
+      {
+        response.Write(user.Id);
+      }
     }
   }
   public class DatabaseContext : DbContextWrapper

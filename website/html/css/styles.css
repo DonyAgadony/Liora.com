@@ -2,38 +2,6 @@
     background-color: #18435a;
 }
 
-nav {
-    background-color: #16324F;
-    color: white;
-    padding: 2.5vh 0;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.logo {
-    float: left;
-    font-size: 24px;
-}
-
-.nav-links {
-    float: right;
-    list-style: none;
-}
-
-.nav-links li {
-    display: inline;
-    margin-left: 20px;
-}
-
-.nav-links li a {
-    color: white;
-    text-decoration: none;
-}
-
 /* Hero section */
 .hero {
     background-image: url('https://via.placeholder.com/1500x500');

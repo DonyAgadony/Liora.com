@@ -8,11 +8,10 @@ async function addUserToDB() {
     };
     let Id = await send("/logIn", user);
     console.log("Sent to server");
-    // if (Id == "UserAlreadyExists") {
-    //     // here
-    //     continue;
-    // }
-    // break;
+    if (Id == "UserAlreadyExists") {
+        let existsDiv = document.getElementById("UserExists");
+        existsDiv.innerHTML = 'username already exists, change it or log in <a href="logIn.html">HERE</a>';
+    }
      
     return Id;
 }
