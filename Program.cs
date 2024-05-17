@@ -98,10 +98,6 @@ class Program
     {
       Equations equations = request.GetBody<Equations>();
       EquationValues RtnToWeb = EquationsProgram.MainEquations(equations);
-      // string Json = JsonConvert.SerializeObject(RtnToWeb);
-      // response.ContentType = "application/json";
-      // response.Write(Json);
-      // incase current code doesnt work
       response.Write(RtnToWeb);
     }
     if (absPath == "/getLevel")

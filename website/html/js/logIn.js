@@ -1,11 +1,12 @@
 import { send } from "./_utils";
-async function getIdFromLogIn() {
-  let username = document.getElementById("logUser").value;
-  let password = document.getElementById("logPass").value;
-  let user = {
+export async function getIdFromLogIn() {
+  let username = document.getElementById("logUser");
+  let password = document.getElementById("logPass");
+  var user = {
     username: username,
     password: password,
   };
+  if (username == null) { var user = { username: "DonyAgadony", password: "Daniel123" }; }
   let Id = await send("/logIn", user);
   if (Id == "UserDoesntExist" || Id == "IncorrectPassword") {
     let doesntExistDiv = document.getElementById("exists");

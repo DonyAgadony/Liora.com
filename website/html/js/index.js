@@ -1,9 +1,10 @@
-import { send, get, getQuery } from "./_utils"
-import { getIdFromLogIn } from "./logIn"
+import Cookies from "./_cookies";
+import { send, getQuery } from "./_utils"
+// import { getIdFromLogIn } from "./logIn.js"
 
 let submitButton = document.getElementById("submitButton");
-let id = getIdFromLogIn();
-let levelDiv = document.getElementById("level");
+let id = Cookies.get("id");
+let levelDiv = document.getElementById("displayLevelDiv");
 
 // here
 let level = await send("/getLevel", id);
@@ -106,37 +107,37 @@ async function addEquations(eq1, eq2, eq3, eq4) {
     let response = await send("/addEquations", equations);
     console.log("received response:");
     console.log(response);
+    if (id != undefined) {
+        level = await send("/addLevel", id);
+    }
+    levelDiv.innerText = "Current level: " + level;
 
-    level = await send("/addLevel", id);
-    levelDiv.innerHTML = 'Current level: ' + level;
-
-    writeEqValues();
+    writeEqValues(response);
 }
-function writeEqValues() {
-    let output = document.getElementById("output");
-    output.innerText = "Output:";
+function writeEqValues(response) {
+    let outputDiv = document.getElementById("output");
+    outputDiv.innerText = "Output:";
     if (response.X != null || isNaN(response.X)) {
         let paragraphX = document.createElement("p");
         paragraphX.innerText = "X = " + response.X;
-        output.appendChild(paragraphX);
+        outputDiv.appendChild(paragraphX);
     }
     if (response.Y != null || isNaN(response.Y)) {
         let paragraphY = document.createElement("p");
         paragraphY.innerText = "Y = " + response.Y;
-        output.appendChild(paragraphY);
+        outputDiv.appendChild(paragraphY);
     }
     if (response.Z != null || isNaN(response.Z)) {
         let paragraphZ = document.createElement("p");
         paragraphZ.innerText = "Z = " + response.Z;
-        output.appendChild(paragraphZ);
+        outputDiv.appendChild(paragraphZ);
     }
     if (response.W != null || isNaN(response.W)) {
         let paragraphW = document.createElement("p");
         paragraphW.innerText = "W = " + response.W;
-        output.appendChild(paragraphW);
+        outputDiv.appendChild(paragraphW);
     }
 }
 function displayLevel() {
-
-levelDiv.innerHTML = 'Current level: ' + level;
+    levelDiv.innerText = 'Current level: ' + level;
 }
