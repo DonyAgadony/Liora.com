@@ -124,9 +124,9 @@ class Program
       // username already exists in context
       if (CheckForExistingUser != null)
       {
+        Console.WriteLine(13);
         response.Write("UserAlreadyExists");
       }
-      Console.WriteLine(13);
       // adding user to database and returning the new user's Id
       else
       {
