@@ -1,4 +1,0 @@
-logIn.html, styles.css
-make page
-signUp.html, styles.css;
-make page

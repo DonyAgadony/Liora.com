@@ -117,7 +117,7 @@ class Program
     }
     if (absPath == "/signUp")
     {
-
+      Console.WriteLine("EnteredSignUpMessage");
       (string username, string password) = request.GetBody<(string, string)>();
 
       User CheckForExistingUser = databaseContext.Users.First(u => u.Username == username)!;
@@ -126,12 +126,14 @@ class Program
       {
         response.Write("UserAlreadyExists");
       }
+      Console.WriteLine(13);
       // adding user to database and returning the new user's Id
       else
       {
         var userId = Uuid.NewDatabaseFriendly(UUIDNext.Database.SQLite).ToString();
         var User = new User(username, password, userId, 0);
         databaseContext.Users.Add(User);
+        Console.WriteLine(userId);
         response.Write(userId);
       }
     }
