@@ -101,13 +101,13 @@ class Program
       EquationValues RtnToWeb = EquationsProgram.MainEquations(equations);
       response.Write(RtnToWeb);
     }
-    if (absPath == "/getLevel")
+    else if (absPath == "/getLevel")
     {
       string Id = request.GetBody<string>();
       User user = databaseContext.Users.Find(Id)!;
       response.Write(user.Level);
     }
-    if (absPath == "/addLevel")
+    else if (absPath == "/addLevel")
     {
       string Id = request.GetBody<string>();
       User user = databaseContext.Users.Find(Id)!;
@@ -116,7 +116,7 @@ class Program
       // user = databaseContext.Users.Find(Id)!; (Im not sure if we have to do this so its a comment in the meantime)
       response.Write(user.Level);
     }
-    if (absPath == "/signUp")
+    else if (absPath == "/signUp")
     {
       Console.WriteLine("EnteredSignUpMessage");
       (string username, string password) = request.GetBody<(string, string)>();
@@ -138,7 +138,7 @@ class Program
         response.Write(userId);
       }
     }
-    if (absPath == "/logIn")
+    else if (absPath == "/logIn")
     {
       (string username, string password) = request.GetBody<(string, string)>();
 
@@ -154,10 +154,6 @@ class Program
       {
         response.Write(user.Id);
       }
-    }
-    if (absPath == "/FindUser")
-    {
-
     }
   }
   public class DatabaseContext : DbContextWrapper
