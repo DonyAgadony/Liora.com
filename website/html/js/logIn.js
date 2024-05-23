@@ -2,7 +2,6 @@ import Cookies from "./_cookies";
 import { send } from "./_utils";
 let submit = document.getElementById("SubmitButton");
 submit.onclick = async function () {
-  console.log("submit");
   let username = document.getElementById("logUser");
   let password = document.getElementById("logPass");
   var user = {
