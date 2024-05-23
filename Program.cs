@@ -23,9 +23,6 @@ class User(string Id, string Username, string Password, int Level)
 
 }
 
-
-
-
 class Program
 {
   public static void Main()
@@ -118,9 +115,7 @@ class Program
     }
     else if (absPath == "/signUp")
     {
-      Console.WriteLine("EnteredSignUpMessage");
       (string username, string password) = request.GetBody<(string, string)>();
-      Console.WriteLine("KJGHCFHCVGHFKYJHGUYLGVJKYYVCH");
       User? CheckForExistingUser = databaseContext.Users.FirstOrDefault(u => u.Username == username);
       // username already exists in context
       if (CheckForExistingUser != null)
@@ -134,7 +129,6 @@ class Program
         var User = new User(userId, username, password, 0);
         databaseContext.Users.Add(User);
         databaseContext.SaveChanges();
-        Console.WriteLine(userId);
         response.Write(userId);
       }
     }
@@ -146,7 +140,6 @@ class Program
       // username doesnt exist in context
       if (user == null)
       {
-        Console.WriteLine("user not found");
         response.Write("UserDoesntExist");
       }
       // returning existing user ID

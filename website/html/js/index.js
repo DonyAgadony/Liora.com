@@ -128,8 +128,6 @@ async function addEquations(eq1, eq2, eq3, eq4) {
         Eq4: eq4
     };
     let response = await send("/addEquations", equations);
-    console.log("received response:");
-    console.log(response);
     if (id != undefined) {
         level = await send("/addLevel", id);
     }
