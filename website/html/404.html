@@ -18,29 +18,18 @@
     <div class="gap">
     <img src="images\image_processing20210818-9482-t33lho.gif">
       <button class="goHome" onclick="window.location.href='index.html'">Go Home</button>
-      <audio controls autoplay style="display: none">
+      <audio controls autoplay style="display: none" id="audio">
         <source src="sound/404.mp3" type="audio/mpeg">
       </audio>
     </div>
   </div>
   <script>
-    window.onload = function () {
-        window.AudioContext = window.AudioContext || window.webkitAudioContext; //fix up prefixing
-        var context = new AudioContext(); //context
-        var source = context.createBufferSource(); //source node
-        source.connect(context.destination); //connect source to speakers so we can hear it
-        var request = new XMLHttpRequest();
-        request.open('GET', url, true);
-        request.responseType = 'arraybuffer'; //the  response is an array of bits
-        request.onload = function () {
-          context.decodeAudioData(request.response, function (response) {
-            source.buffer = response;
-            source.start(0); //play audio immediately
-            source.loop = true;
-          }, function () { console.error('The request failed.'); });
-        }
-        request.send();
-      }
+    let audio = document.createElement('audio');
+  let permissions = chrome.permissions.request(
+    permissions, Audio,
+    callback ? audio.play():audio.pause()
+  );
+
   </script>
 </body>
 
