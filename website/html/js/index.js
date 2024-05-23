@@ -4,8 +4,9 @@ import { send, getQuery } from "./_utils";
 let submitButton = document.getElementById("submitButton");
 let id = Cookies.get("Id");
 let username = Cookies.get("username");
+let level = 0;
 let levelDiv = document.getElementById("displayLevelDiv");
-
+displayLevel();
 if (id != undefined && username != undefined) {
     console.log("entered");
     console.log(Cookies.get("username"));
@@ -29,8 +30,7 @@ if (id != undefined && username != undefined) {
     }
 
 }
-// here
-let level = 0;
+
 submitButton.onclick = function () {
     let XEq1 = parseFloat(document.getElementById("NumOfXEq1").value);
     let YEq1 = parseFloat(document.getElementById("NumOfYEq1").value);
