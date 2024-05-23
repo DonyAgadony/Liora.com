@@ -85,7 +85,6 @@ class Program
       response.Close();
     }
   }
-
   public static void HandleRequests(HttpListenerContext serverContext, DatabaseContext databaseContext)
   {
     var request = serverContext.Request;

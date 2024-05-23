@@ -17,19 +17,20 @@
     </div>
     <div class="gap">
     <img src="images\image_processing20210818-9482-t33lho.gif">
+
+
+  <audio id="background-music" src="sound/404.mp3" preload="auto"></audio>
+
       <button class="goHome" onclick="window.location.href='index.html'">Go Home</button>
-      <audio controls autoplay style="display: none" id="audio">
-        <source src="sound/404.mp3" type="audio/mpeg">
-      </audio>
     </div>
   </div>
   <script>
-    let audio = document.createElement('audio');
-  let permissions = chrome.permissions.request(
-    permissions, Audio,
-    callback ? audio.play():audio.pause()
-  );
-
+    document.addEventListener('DOMContentLoaded', function () {
+        var audio = document.getElementById('background-music');
+        audio.play().catch(function (error) {
+          console.error("Audio play failed:", error);
+        });
+      });
   </script>
 </body>
 
