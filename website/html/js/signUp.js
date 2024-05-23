@@ -10,6 +10,8 @@ submitButton.onclick = async function () {
     if (password.value != confirmPass.value) {
         existsDiv.innerText = "password and confirm password dont match";
     }
+    else if(password.value ==null) {
+          existsDiv.innerText = "password must have character";}
     else {
 
         let user = {

@@ -82,7 +82,7 @@ public static class Utils
     else if (isHtml)
     {
       response.StatusCode = (int)HttpStatusCode.Redirect;
-      response.RedirectLocation = "/website/404.html";
+      response.RedirectLocation = "/website/html/404.html";
     }
   }
 
