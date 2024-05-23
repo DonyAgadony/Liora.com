@@ -1,17 +1,25 @@
+import Cookies from "./_cookies";
 import { send } from "./_utils";
-export async function getIdFromLogIn() {
+let submit = document.getElementById("SubmitButton");
+submit.onclick = async function () {
+  console.log("submit");
   let username = document.getElementById("logUser");
   let password = document.getElementById("logPass");
   var user = {
-    username: username,
-    password: password,
+    username: username.value,
+    password: password.value,
   };
-  if (username == null) { var user = { username: "DonyAgadony", password: "Daniel123" }; }
   let Id = await send("/logIn", user);
   if (Id == "UserDoesntExist" || Id == "IncorrectPassword") {
     let doesntExistDiv = document.getElementById("exists");
-    doesntExistDiv.innerHTML = 'Incorrect username or password, or sign up <a href="signUp.html">HERE</a>';
+    doesntExistDiv.innerText = "Incorrect username or password, or sign up";
+    let signup = document.createElement("a");
+    signup.href = "signUp.html";
+    doesntExistDiv.appendChild(signup)
   }
-  return Id;
+  else {
+    Cookies.set("Id", Id);
+    Cookies.set("username", user.username);
+    window.location.href = "index.html";
+  }
 }
-console.log(getIdFromLogIn());

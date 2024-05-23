@@ -73,6 +73,7 @@ class Program
         ╰───────────────────────────────*/
         databaseContext.SaveChanges();
 
+
       }
       catch (Exception e)
       {
@@ -119,20 +120,20 @@ class Program
     {
       Console.WriteLine("EnteredSignUpMessage");
       (string username, string password) = request.GetBody<(string, string)>();
-
-      User CheckForExistingUser = databaseContext.Users.First(u => u.Username == username)!;
+      Console.WriteLine("KJGHCFHCVGHFKYJHGUYLGVJKYYVCH");
+      User? CheckForExistingUser = databaseContext.Users.FirstOrDefault(u => u.Username == username);
       // username already exists in context
       if (CheckForExistingUser != null)
       {
-        Console.WriteLine(13);
         response.Write("UserAlreadyExists");
       }
       // adding user to database and returning the new user's Id
       else
       {
         var userId = Uuid.NewDatabaseFriendly(UUIDNext.Database.SQLite).ToString();
-        var User = new User(username, password, userId, 0);
+        var User = new User(userId, username, password, 0);
         databaseContext.Users.Add(User);
+        databaseContext.SaveChanges();
         Console.WriteLine(userId);
         response.Write(userId);
       }
@@ -141,17 +142,12 @@ class Program
     {
       (string username, string password) = request.GetBody<(string, string)>();
 
-      User user = databaseContext.Users.First(u => u.Username == username && u.Password == password);
-      User CheckForUsername = databaseContext.Users.First(u => u.Username == username);
+      User? user = databaseContext.Users.FirstOrDefault(u => u.Username == username && u.Password == password);
       // username doesnt exist in context
-      if (CheckForUsername == null)
+      if (user == null)
       {
+        Console.WriteLine("user not found");
         response.Write("UserDoesntExist");
-      }
-      // username exists in context and password doesnt match
-      else if (CheckForUsername != null && user == null)
-      {
-        response.Write("IncorrectPassword");
       }
       // returning existing user ID
       else
@@ -159,10 +155,19 @@ class Program
         response.Write(user.Id);
       }
     }
+    if (absPath == "/FindUser")
+    {
+
+    }
   }
   public class DatabaseContext : DbContextWrapper
   {
     public DatabaseContext() : base("Database") { }
     public DbSet<User> Users { get; set; }
   }
+}
+public class IncompleteUser(string username, string password)
+{
+  public string username = username;
+  public string password = password;
 }

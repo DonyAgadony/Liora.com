@@ -167,3 +167,9 @@ section h2 {
 .login .button a:hover {
     opacity: .75;
 }
+
+.HelloText {
+    font-size: 2.75vh;
+    color: antiquewhite;
+    margin-top: 0px;
+}

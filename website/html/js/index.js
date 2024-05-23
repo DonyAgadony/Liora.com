@@ -1,13 +1,36 @@
 import Cookies from "./_cookies";
-import { send, getQuery } from "./_utils"
-// import { getIdFromLogIn } from "./logIn.js"
+import { send, getQuery } from "./_utils";
 
 let submitButton = document.getElementById("submitButton");
-let id = Cookies.get("id");
+let id = Cookies.get("Id");
+let username = Cookies.get("username");
 let levelDiv = document.getElementById("displayLevelDiv");
 
+if (id != undefined && username != undefined) {
+    console.log("entered");
+    console.log(Cookies.get("username"));
+    let div = document.getElementById("login");
+    div.innerHTML = null;
+    let text = document.createElement("h4");
+    text.innerText = "Hello " + username;
+    text.className = "HelloText";
+    div.appendChild(text);
+
+    let buttondiv = document.createElement("div");
+    buttondiv.className = "button";
+    div.appendChild(buttondiv);
+    let SignOutButton = document.createElement("a");
+    SignOutButton.href = "index.html";
+    SignOutButton.innerText = "Sign Out";
+    buttondiv.appendChild(SignOutButton);
+    SignOutButton.onclick = function () {
+        Cookies.remove("id");
+        Cookies.remove("username");
+    }
+
+}
 // here
-let level = await send("/getLevel", id);
+let level = 0;
 submitButton.onclick = function () {
     let XEq1 = parseFloat(document.getElementById("NumOfXEq1").value);
     let YEq1 = parseFloat(document.getElementById("NumOfYEq1").value);
