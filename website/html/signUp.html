@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="css\login.css">
+    <link rel="icon" type="image/x-icon" href="zLogo.ico">
+</head>
+
+<body>
+    <div class="Body">
+        <div class="container">
+            <h1 class="text">Sign Up</h1>
+            <div class="inputs">
+                <div class="inputbox">
+                    <span>Username</span>
+                    <input type="text" required="required" type="text" id="signUser">
+                    <i></i>
+                </div>
+                <div class="inputbox">
+                    <span>Password</span>
+                    <input type="password" required="required" id="signPass">
+                    <i></i>
+                </div>
+                <div class="inputbox">
+                    <span>Confirm Password</span>
+                    <input type="password" required="required" id="signConfirm">
+                    <i></i>
+                </div>
+            </div>
+            <div class="buttons">
+                <button class="coolAsFuck" type="submit" id="submit">Submit</button>
+                <button class="coolAsFuck" type="reset">Reset</button>
+                <button class="coolAsFuck" onclick="window.location = '/website/html/index.html'">Go Home</button>
+            </div>
+            <div id="UserExists" class="UserExists"></div>
+        </div>
+    </div>
+    <script src="./js/signUp.js" type="module"></script>
+</body>
+
+</html>

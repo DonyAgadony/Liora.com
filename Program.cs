@@ -1,14 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Net;
+﻿using System.Net;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using UUIDNext;
+using System.Data.Common;
 using static Playtify.Utils;
 
 namespace Playtify;
 
 class Program
 {
-  static void Main()
+  public static void Main()
   {
     /*───────────────────────────╮
     │ Creating the server object │
@@ -19,8 +20,8 @@ class Program
 
     Console.WriteLine("Server started. Listening for requests...");
     Console.WriteLine("Main page on http://localhost:5000/website/index.html");
-    
-    
+
+
     /*─────────────────────────────────────╮
     │ Creating the database context object │
     ╰─────────────────────────────────────*/

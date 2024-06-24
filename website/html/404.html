@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>404</title>
+  <link rel="stylesheet" href="css\404.css">
+  <link rel="icon" type="image/x-icon" href="zLogo.ico">
+</head>
+
+<body>
+  <div class="Body">
+    <div></div>
+    <div class="text">
+      <h1>404 - Not Found</h1>
+    </div>
+    <div class="text">
+      <h2>The page you were looking for doesn't exist :(</h2>
+    </div>
+    <div class="gap">
+      <img src="images\image_processing20210818-9482-t33lho.gif">
+
+
+      <audio id="background-music" src="sound/404.mp3" preload="auto"></audio>
+
+      <button class="goHome" onclick="window.location.href='index.html'">Go Home</button>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var playButton = document.getElementById('play-button');
+      var audio = document.getElementById('background-music');
+
+      playButton.addEventListener('click', function () {
+        audio.play().then(function () {
+          playButton.style.display = 'none'; // Hide the button after the music starts
+        }).catch(function (error) {
+          console.error("Audio play failed:", error);
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
