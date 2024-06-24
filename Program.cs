@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Net;
 using Microsoft.EntityFrameworkCore;
-using static Project.Utils;
+using static Playtify.Utils;
 
-namespace Project;
+namespace Playtify;
 
 class Program
 {
